@@ -7,7 +7,7 @@
         margin: 0;
         padding: 0;
       }
-      
+
       svg {
         font-family: 'HammersmithOne', 'Hammersmith One';
         font-size: 4.6px;
@@ -36,7 +36,7 @@
         font-size: 2em;
         z-index: 999;
       }
-      
+
       #container input {
         width: 15em;
         font-size: 1em;
@@ -139,8 +139,14 @@
 
       var current = document.getElementById("current");
       var counter = 0;
-      var timer = document.getElementById("timer"),
-          seconds = 0, minutes = 0, hours = 0;
+      var timer = document.getElementById("timer");
+      var seconds = 0;
+      var minutes = 0;
+      var hours = 0;
+
+      function pad(n) {
+        return n ? (n > 9 ? n : "0" + n) : "00";
+      }
 
       function add() {
         seconds++;
@@ -152,8 +158,8 @@
             hours++;
           }
         }
-        
-        timer.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+        timer.textContent = pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
       }
       var started = false;
 
