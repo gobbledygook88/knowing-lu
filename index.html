@@ -11,17 +11,14 @@
       svg {
         font-family: 'HammersmithOne', 'Hammersmith One';
         font-size: 4.6px;
-        // transform: scale(1.5);
-        // -ms-transform: scale(1.5); /* IE 9 */
-        // -webkit-transform: scale(1.5); /* Safari */
 
         width: 100%;
         height: 100%;
 
         -webkit-touch-callout: none; /* iOS Safari */
           -webkit-user-select: none; /* Safari */
-          -khtml-user-select: none;  /* Konqueror HTML */
-            -moz-user-select: none;  /* Firefox */
+           -khtml-user-select: none; /* Konqueror HTML */
+             -moz-user-select: none; /* Firefox */
               -ms-user-select: none; /* Internet Explorer/Edge */
                   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
       }
@@ -44,15 +41,6 @@
         width: 15em;
         font-size: 1em;
       }
-
-      .noselect {
-        -webkit-touch-callout: none; /* iOS Safari */
-          -webkit-user-select: none; /* Safari */
-          -khtml-user-select: none;  /* Konqueror HTML */
-            -moz-user-select: none;  /* Firefox */
-              -ms-user-select: none; /* Internet Explorer/Edge */
-                  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-      }
     </style>
   </head>
   <body>
@@ -64,6 +52,7 @@
       <input id="guess" type="text" placeholder="Enter a station name"></input>
     </div>
 
+    <script src="svg-pan-zoom.min.js"></script>
     <script>
       var ajax = new XMLHttpRequest();
       var _total;
@@ -78,6 +67,14 @@
 
         hideText();
         _total = displayTotal();
+
+        svgPanZoom('#status-map', {
+          center: true,
+          fit: true,
+          mouseWheelZoomEnabled: true,
+          panEnabled: true,
+          zoomEnabled: true
+        });
       }
 
       var _s = {};
@@ -134,28 +131,26 @@
       }
 
       function normalise(name) {
-        // Lowercase letters, remove punctuation, remove 'and'
         return name.toLowerCase()
-                   .replace(/[^\w\s]/gi, "")
-                   .replace(/ and /gi, "  ");  // Note: two spaces
+                   .replace(/[^\w\s]/gi, "")  // Remove punctuation
+                   .replace(/ and /gi, "  ")  // Remove 'and'. Note: two spaces
+                   .trim();
       }
 
       var current = document.getElementById("current");
       var counter = 0;
       var timer = document.getElementById("timer"),
-          seconds = 0, minutes = 0, hours = 0,
-          t;
-      var now = (new Date()).getTime();
+          seconds = 0, minutes = 0, hours = 0;
 
       function add() {
         seconds++;
-        if (seconds >= 60) {
-            seconds = 0;
-            minutes++;
-            if(minutes >= 60) {
-              minutes = 0;
-              hours++;
-            }
+        if(seconds >= 60) {
+          seconds = 0;
+          minutes++;
+          if(minutes >= 60) {
+            minutes = 0;
+            hours++;
+          }
         }
         
         timer.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
@@ -163,6 +158,8 @@
       var started = false;
 
       document.getElementById("guess").addEventListener("input", function(e) {
+        var t;
+
         // Start timer if not started already
         if(!started) {
           t = setInterval(add, 1000);
