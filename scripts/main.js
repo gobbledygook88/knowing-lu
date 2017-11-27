@@ -12,13 +12,16 @@ ajax.onload = function(e) {
   hideText();
   _total = displayTotal();
 
-  svgPanZoom('#status-map', {
+  var svg = svgPanZoom('#status-map', {
     center: true,
     fit: true,
     mouseWheelZoomEnabled: true,
     panEnabled: true,
     zoomEnabled: true
   });
+
+  // Set initial zoom level
+  svg.zoomBy(2);
 }
 
 var _s = {};
