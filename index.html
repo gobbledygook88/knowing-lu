@@ -15,12 +15,19 @@
 
     <div id="stats-container">
       <h3>Stats</h3>
+      <div class="canvas-container">
+        <canvas id="line-canvas"></canvas>
+      </div>
+      <div class="canvas-container">
+        <canvas id="zone-canvas"></canvas>
+      </div>
     </div>
 
     <script src="scripts/svg-pan-zoom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="scripts/main.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-24583920-5"></script>
-    <script>
+    <script async>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
