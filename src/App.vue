@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
@@ -12,8 +11,15 @@ export default {
 </script>
 
 <style>
+@import url(http://fonts.googleapis.com/css?family=Hammersmith+One);
+* {
+  font-family: 'HammersmithOne', 'Hammersmith One';
+  margin: 0;
+  padding: 0;
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'HammersmithOne', 'Hammersmith One', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
