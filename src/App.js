@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Tubemap from './Tubemap.js';
 import Play from './Play.js';
-import Utils from './Utils.js';
 import './App.css';
 
 class App extends Component {
@@ -16,8 +15,7 @@ class App extends Component {
     this.checkCorrect = this.checkCorrect.bind(this);
   }
 
-  checkCorrect(event) {
-    const guess = Utils.normalise(event.target.value);
+  checkCorrect(guess) {
     const stations = Object.assign({}, this.state.stations);
     const correct = Object.assign({}, this.state.correct);
 
@@ -38,6 +36,8 @@ class App extends Component {
         stations: stations,
         correct: correct,
       });
+
+      return true;
     }
   }
 
