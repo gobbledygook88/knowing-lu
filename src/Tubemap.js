@@ -14,7 +14,6 @@ class Tubemap extends Component {
     this.correct = props.correct || [];
 
     this.loadSVG();
-    // this.processStationNames();
   }
 
   loadSVG() {
@@ -25,12 +24,10 @@ class Tubemap extends Component {
     ajax.onload = function(e) {
       var div = document.getElementById("map-container");
       div.innerHTML = ajax.responseText;
-      // document.body.insertBefore(div, document.body.childNodes[0]);
 
-      // hideText();
       self.processStationNames();
       // _total = displayTotal();
-      //
+
       self.svgEl = document.getElementById("status-map");
 
       self.svg = svgPanZoom('#status-map', {
