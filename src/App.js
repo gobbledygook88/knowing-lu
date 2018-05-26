@@ -10,31 +10,29 @@ class App extends Component {
     this.state = {
       stations: {},
       correct: {},
+      latest: null,
     };
 
     this.checkCorrect = this.checkCorrect.bind(this);
   }
 
   checkCorrect(guess) {
-    const stations = Object.assign({}, this.state.stations);
-    const correct = Object.assign({}, this.state.correct);
+    const stations = this.state.stations;
+    const correct = Object.assign({}, this.state.correct);  // We will be updating this so we make a copy
 
     if(correct[guess]) {
       console.log('Already guessed');
     }
 
-    if(stations[guess]) {
+    if(stations[guess] && !correct[guess]) {
       // Display the station labels
       stations[guess].forEach(el => el.setAttribute("display", "visible"));
-
-      // Remove DOM references
-      delete stations[guess];
 
       // Add to correct guesses
       correct[guess] = true;  // TODO copy lines and zones
       this.setState({
-        stations: stations,
         correct: correct,
+        latest: guess,
       });
 
       return true;
@@ -47,7 +45,7 @@ class App extends Component {
 
     return (
       <div>
-        <Tubemap stations={stations} correct={correct}></Tubemap>
+        <Tubemap stations={stations} correct={correct} latest={this.state.latest}></Tubemap>
         <Play onGuess={this.checkCorrect}></Play>
       </div>
     );

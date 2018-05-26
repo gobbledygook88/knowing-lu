@@ -31,7 +31,7 @@ class Tubemap extends Component {
       self.processStationNames();
       // _total = displayTotal();
       //
-      // _svgEl = document.getElementById("status-map");
+      self.svgEl = document.getElementById("status-map");
 
       self.svg = svgPanZoom('#status-map', {
         center: true,
@@ -76,7 +76,47 @@ class Tubemap extends Component {
     }
   }
 
+  panIntoView(elDims, vbDims) {
+    // Compute how much we need to move by
+    console.log(elDims);
+    var inv = this.svgEl.getScreenCTM().inverse();
+    // Transform element position into SVG coordinates
+    var svgTop = this.svgEl.createSVGPoint();
+    svgTop.x = elDims.top;
+    svgTop.y = elDims.left;
+    var svgTopP = svgTop.matrixTransform(inv);
+    console.log(inv, svgTopP);
+
+    // Find which direction to move in
+    var h;  // 1 is left, -1 is right
+    var v;  // 1 is down, -1 is up
+
+    // this.svg.pan({x: elDims.x, y: elDims.y});
+    this.svg.panBy({x: 0, y: -300});
+  }
+
+  panToLatest() {
+    const latest = this.props.latest;
+    const els = this.props.stations[latest];
+
+    if (!latest) {
+      return;
+    }
+
+    // Since the svg is 'full-screen', we take the body rectangle as the viewbox
+    var vbDims = document.body.getBoundingClientRect();
+    els.forEach(function(el) {
+      var elDims = el.getBoundingClientRect();
+      if(!Utils.inView(elDims, vbDims)) {
+        console.log(el);
+        this.panIntoView(elDims, vbDims);
+      }
+    }, this);
+  }
+
   render() {
+    this.panToLatest();
+
     return (
       <div id="map-container"></div>
     );
