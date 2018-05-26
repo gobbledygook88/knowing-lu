@@ -26,7 +26,9 @@ class App extends Component {
     }
 
     if(stations[guess]) {
-      console.log('correct:', guess);
+      // Display the station labels
+      stations[guess].forEach(el => el.setAttribute("display", "visible"));
+
       // Remove DOM references
       delete stations[guess];
 
