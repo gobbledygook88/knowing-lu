@@ -1,0 +1,12 @@
+#play-container {
+  position: fixed;
+  right: 1em;
+  bottom: 1em;
+  font-size: 2em;
+  z-index: 998;
+}
+
+#play-container input {
+  width: 14em;
+  font-size: 1em;
+}

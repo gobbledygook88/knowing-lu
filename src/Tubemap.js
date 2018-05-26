@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Utils from './Utils.js';
-import Map from './assets/tubemap.svg'
-import _manualFixes from './assets/stationNameFixes.json'
-import './Tubemap.css'
+import Map from './assets/tubemap.svg';
+import _manualFixes from './assets/stationNameFixes.json';
+import './Tubemap.css';
 
 const svgPanZoom = require('svg-pan-zoom');
 
@@ -10,8 +10,8 @@ class Tubemap extends Component {
   constructor(props) {
     super(props);
 
-    this.stations = {};
-    this.correct = {};
+    this.stations = props.stations || {};
+    this.correct = props.correct || [];
 
     this.loadSVG();
     // this.processStationNames();
@@ -38,7 +38,7 @@ class Tubemap extends Component {
         fit: true,
         mouseWheelZoomEnabled: true,
         panEnabled: true,
-        zoomEnabled: true
+        zoomEnabled: true,
       });
 
       // Set initial zoom level
