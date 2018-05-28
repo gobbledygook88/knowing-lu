@@ -14,15 +14,16 @@ class Play extends Component {
   }
 
   guess(event) {
-    let guess = Utils.normalise(event.target.value);
+    let state = event.target.value;
+    let guess = Utils.normalise(state);
 
     // Clear the input if the guess is correct
     if (this.props.onGuess(guess)) {
-      guess = '';
+      state = '';
     }
 
     this.setState({
-      current: guess,
+      current: state,
     });
   }
 
