@@ -69,7 +69,9 @@ class Tubemap extends Component {
       this.stations[stationName].push(station);
 
       // Hide group
-      station.setAttribute("display", "none");
+      if (!this.correct[stationName]) {
+        station.setAttribute("display", "none");
+      }
     }
   }
 

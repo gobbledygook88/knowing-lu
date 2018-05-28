@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import Tubemap from './Tubemap.js';
 import Play from './Play.js';
+import Utils from './Utils.js';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
+    this._lsKey = 'knowing-lu-correct';
+
+    let lsValue = JSON.parse(localStorage.getItem(this._lsKey));
+
     this.state = {
       stations: {},
-      correct: {},
+      correct: lsValue ? Utils.arrayToObjKeys(lsValue, true) : {},
       latest: null,
     };
 
@@ -34,6 +39,9 @@ class App extends Component {
         correct: correct,
         latest: guess,
       });
+
+      // Save current state to LocalStorage
+      localStorage.setItem(this._lsKey, JSON.stringify(Utils.objKeysToArray(correct)));
 
       return true;
     }

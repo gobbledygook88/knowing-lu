@@ -14,6 +14,16 @@ class Utils {
                .replace(/ and /gi, "  ")  // Remove 'and'. Note: two spaces
                .trim();
   }
+
+  static objKeysToArray(obj) {
+    return Object.keys(obj);
+  }
+
+  static arrayToObjKeys(arr, def) {
+    let obj = {};
+    arr.forEach(a => obj[a] = def);
+    return obj;
+  }
 }
 
 export default Utils;
