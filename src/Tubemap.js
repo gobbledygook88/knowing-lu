@@ -111,17 +111,18 @@ class Tubemap extends Component {
 
     // Since the svg is 'full-screen', we take the body rectangle as the viewbox
     var vbDims = document.body.getBoundingClientRect();
+    console.log(vbDims);
     els.forEach(function(el) {
       var elDims = el.getBoundingClientRect();
+      console.log(elDims);
       if(!Utils.inView(elDims, vbDims)) {
-        console.log(el);
-        this.panIntoView(elDims, vbDims);
+        this.panIntoView(elDims.top, elDims.left, el.getScreenCTM(), el, vbDims);
       }
     }, this);
   }
 
   render() {
-    this.panToLatest();
+    // this.panToLatest();
 
     return (
       <div id="map-container"></div>
