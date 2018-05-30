@@ -10,8 +10,11 @@ class Tubemap extends Component {
   constructor(props) {
     super(props);
 
-    this.stations = props.stations || {};
-    this.correct = props.correct || [];
+    this.state = {
+      stations: props.stations,
+      correct: props.correct,
+    }
+    this.updateStations = props.updateStations;
 
     this.loadSVG();
   }
@@ -44,14 +47,15 @@ class Tubemap extends Component {
   }
 
   processStationNames() {
-    var stationNames = document.getElementById("station-names");
+    let stationNames = document.getElementById("station-names");
+    let stations = {};
 
     // Loop through each child of the group and extract station names
     // This is a HTMLCollection - an array-like object so no forEach()
-    var stations = stationNames.children;
-    for(var i = 0; i < stations.length; i++) {
-      var station = stations[i];
-      var stationName = Utils.normalise(
+    let stationDOMEls = stationNames.children;
+    for(var i = 0; i < stationDOMEls.length; i++) {
+      let station = stationDOMEls[i];
+      let stationName = Utils.normalise(
         station.textContent
                .trim()
                .split("\n")
@@ -65,14 +69,17 @@ class Tubemap extends Component {
       stationName = _manualFixes[stationName] || stationName;
 
       // Support multiple labels for each station
-      this.stations[stationName] = this.stations[stationName] || [];
-      this.stations[stationName].push(station);
+      stations[stationName] = stations[stationName] || [];
+      stations[stationName].push(station);
 
       // Hide group
-      if (!this.correct[stationName]) {
+      if (!this.state.correct[stationName]) {
         station.setAttribute("display", "none");
       }
     }
+
+    // Update stations state via the parent
+    this.updateStations(stations);
   }
 
   panIntoView(elDims, vbDims) {

@@ -28,8 +28,12 @@ class Play extends Component {
   }
 
   render() {
+    const numCorrect = Object.keys(this.props.correct).length;
+    const totalStations = Object.keys(this.props.stations).length;
+
     return (
       <div id="play-container">
+        <p>{numCorrect}/{totalStations}</p>
         <input type="text" placeholder="Enter a station name" value={this.state.current} onChange={this.guess}></input>
       </div>
     );

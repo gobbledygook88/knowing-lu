@@ -19,6 +19,13 @@ class App extends Component {
     };
 
     this.checkCorrect = this.checkCorrect.bind(this);
+    this.updateStations = this.updateStations.bind(this);
+  }
+
+  updateStations(stations) {
+    this.setState({
+      stations: stations
+    });
   }
 
   checkCorrect(guess) {
@@ -53,8 +60,8 @@ class App extends Component {
 
     return (
       <div>
-        <Tubemap stations={stations} correct={correct} latest={this.state.latest}></Tubemap>
-        <Play onGuess={this.checkCorrect}></Play>
+        <Tubemap stations={stations} correct={correct} latest={this.state.latest} updateStations={this.updateStations}></Tubemap>
+        <Play stations={stations} correct={correct} onGuess={this.checkCorrect}></Play>
       </div>
     );
   }
