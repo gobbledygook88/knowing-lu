@@ -1,14 +1,24 @@
 #play-container {
   position: fixed;
-  right: 1em;
-  bottom: 1em;
+  width: 50%;
+  height: 2.5em;
+  bottom: 0;
+  margin-left: 25%;
+  padding-top: 0.5em;
   font-size: 2em;
   z-index: 998;
+  text-align: center;
+  color: #ffffff;
 }
 
 #play-container input {
+  display: inline-block;
   width: 14em;
+  margin: 0 auto;
   font-size: 1em;
-  padding-left: 0.1em;
-  padding-right: 0.1em;
+  background-color: #2d3039;
+  outline: none;
+  border: 0;
+  color: #ffffff;
+  text-align: center;
 }

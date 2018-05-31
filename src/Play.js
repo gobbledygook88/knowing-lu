@@ -33,8 +33,8 @@ class Play extends Component {
 
     return (
       <div id="play-container">
-        <p>{numCorrect}/{totalStations}</p>
         <input type="text" placeholder="Enter a station name" value={this.state.current} onChange={this.guess}></input>
+        {numCorrect}/{totalStations}
       </div>
     );
   }
