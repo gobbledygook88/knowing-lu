@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import Gameboard from './Gameboard.js';
-import Instructions from './Instructions.js';
 import './Nav.css';
 
 class Nav extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const changeMode = this.props.changeMode;
 
