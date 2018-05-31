@@ -1,0 +1,30 @@
+#instructions {
+  position: absolute;
+  width: 50%;
+  height: auto;
+  margin: 5em 25%;
+  padding: 2em;
+  background-color: white;
+}
+
+#instructions p {
+  margin: 1em 0;
+}
+
+.modes {
+  display: inline-block;
+}
+
+.modes div {
+  float: left;
+  width: 50%;
+  padding: 0 3em;
+  text-align: center;
+}
+
+.modes button {
+  display: block;
+  width: 50%;
+  height: 3em;
+  margin: 0 auto;
+}
