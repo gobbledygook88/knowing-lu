@@ -8,7 +8,7 @@ class Gameboard extends Component {
   constructor(props) {
     super(props);
 
-    let key = `knowing-lu-${props.mode}`;
+    let key = Gameboard.createKey(props.mode);
 
     this.state = {
       key: key,
@@ -22,7 +22,7 @@ class Gameboard extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    let key = `knowing-lu-${props.mode}`;
+    let key = Gameboard.createKey(props.mode);
 
     if (state.key !== key) {
       let correct = Gameboard.getCorrectStations(key);
@@ -36,6 +36,10 @@ class Gameboard extends Component {
     }
 
     return null;
+  }
+
+  static createKey(mode) {
+    return !!mode ? `knowing-lu-${mode}` : null;
   }
 
   static getCorrectStations(key) {
@@ -98,7 +102,9 @@ class Gameboard extends Component {
     return (
       <div>
         <Tubemap stations={stations} correct={correct} latest={this.state.latest} updateStations={this.updateStations}></Tubemap>
-        <Play stations={stations} correct={correct} onGuess={this.checkCorrect}></Play>
+        {this.state.key &&
+          <Play stations={stations} correct={correct} onGuess={this.checkCorrect}></Play>
+        }
       </div>
     );
   }
