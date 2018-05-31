@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Gameboard from './Gameboard.js';
 import Instructions from './Instructions.js';
-import modes from './modes.json';
 import './App.css';
 
 class App extends Component {
@@ -9,14 +8,24 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentMode: modes.quiz,  // Default mode
+      currentMode: '',
     };
+
+    this.changeMode = this.changeMode.bind(this);
+  }
+
+  changeMode(mode) {
+    this.setState({
+      currentMode: mode,
+    })
   }
 
   render() {
     return (
       <div>
-        <Instructions></Instructions>
+        {!this.state.currentMode &&
+          <Instructions changeMode={this.changeMode}></Instructions>
+        }
         <Gameboard mode={this.state.currentMode}></Gameboard>
       </div>
     );

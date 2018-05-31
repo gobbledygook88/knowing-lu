@@ -8,19 +8,55 @@ class Gameboard extends Component {
   constructor(props) {
     super(props);
 
-    // this._lsKey = 'knowing-lu-correct';
-    this._lsKey = `knowing-lu-${props.currentMode}`;
-
-    let lsValue = JSON.parse(localStorage.getItem(this._lsKey));
+    let key = `knowing-lu-${props.mode}`;
 
     this.state = {
+      key: key,
       stations: {},
-      correct: lsValue ? Utils.arrayToObjKeys(lsValue, true) : {},
+      correct: Gameboard.getCorrectStations(key),
       latest: null,
     };
 
     this.checkCorrect = this.checkCorrect.bind(this);
     this.updateStations = this.updateStations.bind(this);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    let key = `knowing-lu-${props.mode}`;
+
+    if (state.key !== key) {
+      let correct = Gameboard.getCorrectStations(key);
+
+      Gameboard.resetBoard(state.stations, correct);
+
+      return {
+        key: key,
+        correct: correct,
+      }
+    }
+
+    return null;
+  }
+
+  static getCorrectStations(key) {
+    let lsValue = JSON.parse(localStorage.getItem(key));
+    return lsValue ? Utils.arrayToObjKeys(lsValue, true) : {}
+  }
+
+  static resetBoard(stations, correct) {
+    // Hide all stations
+    Object.values(stations).forEach(
+      arr => arr.forEach(
+        el => el.setAttribute("display", "none")
+      )
+    );
+
+    // Show all correct stations
+    Object.keys(correct).forEach(
+      s => stations[s].forEach(
+        el => el.setAttribute("display", "visible")
+      )
+    );
   }
 
   updateStations(stations) {
@@ -49,7 +85,7 @@ class Gameboard extends Component {
       });
 
       // Save current state to LocalStorage
-      localStorage.setItem(this._lsKey, JSON.stringify(Utils.objKeysToArray(correct)));
+      localStorage.setItem(this.key, JSON.stringify(Utils.objKeysToArray(correct)));
 
       return true;
     }

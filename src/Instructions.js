@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import modes from './modes.json';
 import './Instructions.css';
 
 class Instructions extends Component {
   render() {
+    const changeMode = this.props.changeMode;
+
     return (
       <div id="instructions">
         <h1>Knowing LU</h1>
@@ -27,11 +30,11 @@ class Instructions extends Component {
         </p>
         <div className="modes">
           <div>
-            <button>Track</button>
+            <button onClick={() => changeMode(modes.track)}>Track</button>
             <p>Enter the names of the stations you have entered or exited.</p>
           </div>
           <div>
-            <button>Quiz</button>
+            <button onClick={() => changeMode(modes.quiz)}>Quiz</button>
             <p>Challange yourself and see how many stations you can name.</p>
           </div>
         </div>
