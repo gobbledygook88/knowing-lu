@@ -85,7 +85,7 @@ class Gameboard extends Component {
       });
 
       // Save current state to LocalStorage
-      localStorage.setItem(this.key, JSON.stringify(Utils.objKeysToArray(correct)));
+      localStorage.setItem(this.state.key, JSON.stringify(Utils.objKeysToArray(correct)));
 
       return true;
     }
