@@ -5,3 +5,15 @@
   bottom: 0;
   background-color: #2d3039;
 }
+
+.mode {
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+  font-size: 2em;
+  color: #ffffff;
+}
+
+.mode select {
+  margin-left: 0.5em;
+  font-size: 1em;
+}
