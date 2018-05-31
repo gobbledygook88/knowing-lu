@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Gameboard from './Gameboard.js';
 import Instructions from './Instructions.js';
+import Nav from './Nav.js';
 import './App.css';
 
 class App extends Component {
@@ -23,9 +24,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        {!this.state.currentMode &&
+        {!this.state.currentMode ? (
           <Instructions changeMode={this.changeMode}></Instructions>
-        }
+        ) : (
+          <Nav changeMode={this.changeMode}></Nav>
+        )}
         <Gameboard mode={this.state.currentMode}></Gameboard>
       </div>
     );
