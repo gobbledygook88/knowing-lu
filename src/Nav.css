@@ -7,7 +7,7 @@
 }
 
 .mode {
-  padding-top: 0.5em;
+  padding-top: 0.75em;
   padding-left: 0.5em;
   font-size: 2em;
   color: #ffffff;
@@ -16,4 +16,12 @@
 .mode select {
   margin-left: 0.5em;
   font-size: 1em;
+  background: none;
+  border: 0;
+  outline: 0;
+  color: #777777;
+}
+
+.mode option {
+  background-color: #2d3039;
 }
