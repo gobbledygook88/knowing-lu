@@ -19,6 +19,7 @@ class Gameboard extends Component {
 
     this.checkCorrect = this.checkCorrect.bind(this);
     this.updateStations = this.updateStations.bind(this);
+    this.resetBoard = this.resetBoard.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -27,7 +28,7 @@ class Gameboard extends Component {
     if (state.key !== key) {
       let correct = Gameboard.getCorrectStations(key);
 
-      Gameboard.resetBoard(state.stations, correct);
+      Gameboard.refreshBoard(state.stations, correct);
 
       return {
         key: key,
@@ -47,7 +48,7 @@ class Gameboard extends Component {
     return lsValue ? Utils.arrayToObjKeys(lsValue, true) : {}
   }
 
-  static resetBoard(stations, correct) {
+  static refreshBoard(stations, correct) {
     // Hide all stations
     Object.values(stations).forEach(
       arr => arr.forEach(
@@ -67,6 +68,18 @@ class Gameboard extends Component {
     this.setState({
       stations: stations
     });
+  }
+
+  updateCorrect(correct) {
+    this.setState({
+      correct: correct
+    })
+  }
+
+  resetBoard() {
+    this.updateCorrect({});
+    Gameboard.refreshBoard(this.state.stations, this.state.correct);
+    localStorage.removeItem(this.state.key);
   }
 
   checkCorrect(guess) {
@@ -103,7 +116,7 @@ class Gameboard extends Component {
       <div>
         <Tubemap stations={stations} correct={correct} latest={this.state.latest} updateStations={this.updateStations}></Tubemap>
         {this.state.key &&
-          <Play stations={stations} correct={correct} onGuess={this.checkCorrect}></Play>
+          <Play stations={stations} correct={correct} onGuess={this.checkCorrect} reset={this.resetBoard}></Play>
         }
       </div>
     );

@@ -11,6 +11,9 @@ class Play extends Component {
     };
 
     this.guess = this.guess.bind(this);
+    this.cancelReset = this.cancelReset.bind(this);
+    this.confirmReset = this.confirmReset.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   guess(event) {
@@ -27,6 +30,26 @@ class Play extends Component {
     });
   }
 
+  cancelReset(e) {
+    e.preventDefault();
+    this.setState({
+      confirmReset: false,
+    });
+  }
+
+  confirmReset(e) {
+    e.preventDefault();
+    this.setState({
+      confirmReset: true,
+    })
+  }
+
+  reset(e) {
+    e.preventDefault();
+    this.props.reset();
+    this.cancelReset(e);
+  }
+
   render() {
     const numCorrect = Object.keys(this.props.correct).length;
     const totalStations = Object.keys(this.props.stations).length;
@@ -35,6 +58,13 @@ class Play extends Component {
       <div id="play-container">
         <input type="text" placeholder="Enter a station name" value={this.state.current} onChange={this.guess}></input>
         {numCorrect}/{totalStations}
+        <div className="reset">
+          {!this.state.confirmReset ? (
+            <a href="" onClick={this.confirmReset}>Reset</a>
+          ) : (
+            <span>Are you sure? <a href="" onClick={this.reset}>Y</a> / <a href="" onClick={this.cancelReset}>N</a></span>
+          )}
+        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 #play-container {
   position: fixed;
-  width: 50%;
+  width: 60%;
   height: 2.5em;
   bottom: 0;
   margin-left: 25%;
@@ -21,4 +21,15 @@
   border: 0;
   color: #ffffff;
   text-align: center;
+}
+
+#play-container .reset {
+  float: right;
+  margin-top: 0.25em;
+  color: #ffffff;
+}
+
+#play-container .reset a {
+  text-decoration: none;
+  color: #ffffff;
 }
