@@ -27,7 +27,7 @@ class App extends Component {
         {!this.state.currentMode ? (
           <Instructions changeMode={this.changeMode}></Instructions>
         ) : (
-          <Nav changeMode={this.changeMode}></Nav>
+          <Nav mode={this.state.currentMode} changeMode={this.changeMode}></Nav>
         )}
         <Gameboard mode={this.state.currentMode}></Gameboard>
       </div>
