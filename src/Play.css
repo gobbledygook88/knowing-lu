@@ -1,6 +1,6 @@
 #play-container {
   position: fixed;
-  width: 60%;
+  width: 50%;
   height: 2.5em;
   bottom: 0;
   margin-left: 25%;
@@ -23,13 +23,19 @@
   text-align: center;
 }
 
-#play-container .reset {
-  float: right;
-  margin-top: 0.25em;
+#reset {
+  position: fixed;
+  height: 2.5em;
+  right: 0;
+  bottom: 0;
+  padding-top: 0.75em;
+  padding-right: 0.5em;
+  font-size: 2em;
+  z-index: 999;
   color: #ffffff;
 }
 
-#play-container .reset a {
+#reset a {
   text-decoration: none;
   color: #ffffff;
 }

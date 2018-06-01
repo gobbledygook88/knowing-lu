@@ -55,10 +55,12 @@ class Play extends Component {
     const totalStations = Object.keys(this.props.stations).length;
 
     return (
-      <div id="play-container">
-        <input type="text" placeholder="Enter a station name" value={this.state.current} onChange={this.guess}></input>
-        {numCorrect}/{totalStations}
-        <div className="reset">
+      <div>
+        <div id="play-container">
+          <input type="text" placeholder="Enter a station name" value={this.state.current} onChange={this.guess}></input>
+          {numCorrect}/{totalStations}
+        </div>
+        <div id="reset">
           {!this.state.confirmReset ? (
             <a href="" onClick={this.confirmReset}>Reset</a>
           ) : (
