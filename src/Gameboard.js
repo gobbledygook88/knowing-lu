@@ -78,8 +78,8 @@ class Gameboard extends Component {
 
   resetBoard() {
     this.updateCorrect({});
-    Gameboard.refreshBoard(this.state.stations, this.state.correct);
     localStorage.removeItem(this.state.key);
+    Gameboard.refreshBoard(this.state.stations, this.state.correct);
   }
 
   checkCorrect(guess) {
