@@ -16,23 +16,21 @@ class Tubemap extends Component {
     }
     this.updateStations = props.updateStations;
 
-    this.loadSVG();
+    this.loadSVG().then(() => this.processStationNames());
   }
 
   loadSVG() {
     var self = this;
-    var ajax = new XMLHttpRequest();
-    ajax.open("GET", Map, true);
-    ajax.send();
-    ajax.onload = function(e) {
+    return fetch(Map).then(response => {
+      if (!response.ok) {
+        throw new Error("Could not retrieve map");
+      }
+      return response.text();
+    }).then(text => {
       var div = document.getElementById("map-container");
-      div.innerHTML = ajax.responseText;
-
-      self.processStationNames();
-      // _total = displayTotal();
+      div.innerHTML = text;
 
       self.svgEl = document.getElementById("status-map");
-
       self.svg = svgPanZoom('#status-map', {
         center: true,
         fit: true,
@@ -43,7 +41,7 @@ class Tubemap extends Component {
 
       // Set initial zoom level
       self.svg.zoomBy(2);
-    }
+    });
   }
 
   processStationNames() {
